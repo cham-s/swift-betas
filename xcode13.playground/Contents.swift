@@ -63,9 +63,28 @@ func after() {
   print("inside after")
 }
 
-async {
-  let im = try! await  fetchPhoto(url: url!)
-  after()
-}
+//async {
+//  let im = try! await  fetchPhoto(url: url!)
+//  after()
+//}
+//
+
+actor Counter {
+  var value = 0
   
+  func increment() -> Int {
+    value = value + 1
+    return value
+  }
+}
+
+let counter = Counter()
+
+asyncDetached {
+  print(await counter.increment())
+}
+
+asyncDetached {
+  print(await counter.increment())
+}
 
