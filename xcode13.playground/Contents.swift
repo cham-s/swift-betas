@@ -1,5 +1,7 @@
 import Foundation
 import UIKit
+import SwiftUI
+import PlaygroundSupport
 
 enum ServerError: Error {
   case invalidServerResponse
@@ -23,3 +25,28 @@ func fetchPhoto(url: URL, completionHandler: @escaping (UIImage?, Error?) -> Voi
   }
   task.resume()
 }
+
+let urlString = "https://i.imgur.com/5H2qG1v.jpeg"
+
+let url = URL(string: urlString)
+var suiImage: Image?
+
+
+fetchPhoto(url: url!) { image, error in
+  guard let img = image else {
+    print(error)
+    return
+  }
+  suiImage = Image(uiImage: img)
+  dump(img)
+}
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+  suiImage
+    .map(PlaygroundPage.current.setLiveView)
+}
+
+
+
+
+
