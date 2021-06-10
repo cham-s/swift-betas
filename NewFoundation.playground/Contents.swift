@@ -2,12 +2,16 @@ import Foundation
 import PlaygroundSupport
 import SwiftUI
 
-var thanks = AttributedString("Thank you!")
+var date = Date().formatted(date: .abbreviated, time: .standard)
 
+var thanks = AttributedString("Thank you!")
 
 PlaygroundPage.current.setLiveView(
   NavigationView {
-    Text(thanks)
+    VStack {
+      Text(thanks)
+      Text(date)
+    }
   }
 )
 
